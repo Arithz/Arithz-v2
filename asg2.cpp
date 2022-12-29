@@ -61,10 +61,10 @@ class LinkedList {
         void printList() {
             Node* current; 
             current = new Node;
-            current = pop();
+            current = first;
             while(current != NULL) {
-                cout << current->info << " -> ";
-                current = pop();
+                cout << current->info;
+                current = current->link;
             }
         }
 };
@@ -106,17 +106,12 @@ string LinkedList::convertToPostfix(LinkedList& stack) {
         }
         else if(isOperator(x)) {
             // cout << "this is operator" << endl;
-            if(precedence(x) < precedence(stack.peek())) {
-                cout << x << "->"<<endl; 
+            if(precedence(x) <= precedence(stack.peek())) {
                 // cout << "x is lower weight with the first element in stack" <<endl;
-                while(precedence(x) < precedence(stack.peek())){
+                while(precedence(x) <= precedence(stack.peek())){
                     first = stack.pop();
                     stack.postfix += first->info;
                 }
-            }else if(precedence(x) == precedence(stack.peek())) {
-                // cout << "x is same weight with the first element in stack" <<endl;
-                first = stack.pop();
-                stack.postfix += first->info;
                 stack.push(x);
             }
             else {
@@ -127,7 +122,8 @@ string LinkedList::convertToPostfix(LinkedList& stack) {
             // cout << " this is alphabet"<<endl;
             stack.postfix += x;
         }
-            cout << "Postfix: " << stack.postfix << endl;
+        cout << "\nPostfix: " << stack.postfix;
+        // cout <<"\t\tStack: "; stack.printList();
     }
     while(stack.peek() != -99) {
         first = stack.pop();
@@ -142,11 +138,11 @@ int main() {
     string infix = "";
     // cout << "Enter your infix expression: ";
     // getline(cin,infix);
-    // infix = "A+B-C";
+    infix = "A+B-C";
     // infix = "(A + B) * C";
     // infix = "(A + B) * (C - D)";
     // infix = "A+((B+C)*(E-F)-G)/(H-I)";
-    infix = "A+B*(C+D)-E/F*G+H";
+    // infix = "A+B*(C+D)-E/F*G+H";
 
     LinkedList stack(infix);
     stack.convertToPostfix(stack);
