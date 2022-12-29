@@ -107,10 +107,13 @@ string LinkedList::convertToPostfix(LinkedList& stack) {
         else if(isOperator(x)) {
             // cout << "this is operator" << endl;
             if(precedence(x) < precedence(stack.peek())) {
+                cout << x << "->"<<endl; 
                 // cout << "x is lower weight with the first element in stack" <<endl;
-                first = stack.pop();
-                stack.postfix += first->info;
-            }else if(precedence(x) ==  precedence(stack.peek())) {
+                while(precedence(x) < precedence(stack.peek())){
+                    first = stack.pop();
+                    stack.postfix += first->info;
+                }
+            }else if(precedence(x) == precedence(stack.peek())) {
                 // cout << "x is same weight with the first element in stack" <<endl;
                 first = stack.pop();
                 stack.postfix += first->info;
@@ -124,6 +127,7 @@ string LinkedList::convertToPostfix(LinkedList& stack) {
             // cout << " this is alphabet"<<endl;
             stack.postfix += x;
         }
+            cout << "Postfix: " << stack.postfix << endl;
     }
     while(stack.peek() != -99) {
         first = stack.pop();
@@ -140,9 +144,9 @@ int main() {
     // getline(cin,infix);
     // infix = "A+B-C";
     // infix = "(A + B) * C";
-    infix = "(A + B) * (C - D)";
+    // infix = "(A + B) * (C - D)";
     // infix = "A+((B+C)*(E-F)-G)/(H-I)";
-    // infix = "A + B * (C+D) - E / F * G + H";
+    infix = "A+B*(C+D)-E/F*G+H";
 
     LinkedList stack(infix);
     stack.convertToPostfix(stack);
