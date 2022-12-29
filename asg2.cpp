@@ -3,7 +3,7 @@
 using namespace std;
 
 struct Node {
-    string info;
+    char info;
     Node* link;
 };
 
@@ -11,16 +11,20 @@ class LinkedList {
     private:
         int count;
         Node* first;
-        Node* last;
+    public:
         string infix = "";
         string postfix = "";
-    public:
+
         int precedence(char c);
-        friend string convertToPostfix();
+        string convertToPostfix(LinkedList&);
         LinkedList() {
             first = NULL;
-            last = NULL;
             count = 0;
+        }
+        LinkedList(string infix) {
+            first = NULL;
+            count = 0;
+            getInfix(infix);
         }
         ~LinkedList() {
             destroyList();
@@ -28,7 +32,9 @@ class LinkedList {
         void getInfix(string infix) {
             this->infix = infix;
         }
-
+        char peek() {
+            return first != NULL? first->info: -99;
+        }
         void destroyList () {
             Node* temp;
             while(first != NULL) {
@@ -36,11 +42,9 @@ class LinkedList {
                 first = first->link;
                 delete temp;
             }
-            last = NULL;
             count = 0;
         }
-
-        void push(string s) {
+        void push(char s) {
             Node* newNode;
             newNode = new Node;
             newNode->info = s;
@@ -72,19 +76,74 @@ int LinkedList::precedence(char c) {
     else return 0;
 }
 
-string convertToPostfix(string infix) {
-    LinkedList stack;
-    stack.push("3");
-    stack.push("5");
-    stack.push("4");
-    stack.printList();
+bool isOperator(char x) {
+    char op[7] = {'+','-','*','/','^','(',')'};
+    for(auto z: op) {
+        if(z == x) return true;
+        continue;
+    }
+    return false;
+}
+
+string LinkedList::convertToPostfix(LinkedList& stack) {
+    Node* first =  new Node;
+    for(char x: stack.infix) {
+        if(x == ' ') 
+            // cout << "this is space character" << endl; 
+            continue;
+        else if(x == '(') 
+            // cout << "this is open brack" << endl; 
+            stack.push(x);
+        else if(x == ')'){
+            // cout << "this is close brack" << endl; 
+            while(stack.peek() != '(') {
+                //loop not yet found a close bracket therefore pop the stack until found close bracket
+                first = stack.pop();
+                stack.postfix += first->info;
+            }
+            //remove the close bracket from stack
+            stack.pop();
+        }
+        else if(isOperator(x)) {
+            // cout << "this is operator" << endl;
+            if(precedence(x) < precedence(stack.peek())) {
+                // cout << "x is lower weight with the first element in stack" <<endl;
+                first = stack.pop();
+                stack.postfix += first->info;
+            }else if(precedence(x) ==  precedence(stack.peek())) {
+                // cout << "x is same weight with the first element in stack" <<endl;
+                first = stack.pop();
+                stack.postfix += first->info;
+                stack.push(x);
+            }
+            else {
+                // cout << "x is upper weight with the first element in stack" << endl;
+                stack.push(x);
+            }
+        }else {
+            // cout << " this is alphabet"<<endl;
+            stack.postfix += x;
+        }
+    }
+    while(stack.peek() != -99) {
+        first = stack.pop();
+        cout << first->info << endl;
+        stack.postfix += first->info;
+    }
+    cout << "Postfix: " << stack.postfix << endl;
     return "";
 }
 
 int main() {
     string infix = "";
+    // cout << "Enter your infix expression: ";
+    // getline(cin,infix);
+    // infix = "A+B-C";
+    // infix = "(A + B) * C";
+    infix = "(A + B) * (C - D)";
+    // infix = "A+((B+C)*(E-F)-G)/(H-I)";
+    // infix = "A + B * (C+D) - E / F * G + H";
 
-    cout << "Enter your infix expression: ";
-    getline(cin,infix);
-    convertToPostfix(infix);
+    LinkedList stack(infix);
+    stack.convertToPostfix(stack);
 }
