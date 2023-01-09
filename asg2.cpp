@@ -122,28 +122,107 @@ string LinkedList::convertToPostfix(LinkedList& stack) {
             // cout << " this is alphabet"<<endl;
             stack.postfix += x;
         }
-        cout << "\nPostfix: " << stack.postfix;
+        // cout << "\nPostfix: " << stack.postfix;
         // cout <<"\t\tStack: "; stack.printList();
     }
     while(stack.peek() != -99) {
         first = stack.pop();
-        cout << first->info << endl;
+        // cout << first->info << endl;
         stack.postfix += first->info;
     }
-    cout << "Postfix: " << stack.postfix << endl;
-    return "";
+    // cout << "Postfix: " << stack.postfix << endl;
+    return stack.postfix;
 }
 
 int main() {
     string infix = "";
     // cout << "Enter your infix expression: ";
     // getline(cin,infix);
-    infix = "A+B-C";
+    // infix = "A+B-C";
     // infix = "(A + B) * C";
     // infix = "(A + B) * (C - D)";
-    // infix = "A+((B+C)*(E-F)-G)/(H-I)";
+    infix = "A+((B+C)*(E-F)-G)/(H-I)";
     // infix = "A+B*(C+D)-E/F*G+H";
 
     LinkedList stack(infix);
-    stack.convertToPostfix(stack);
+    string s = stack.convertToPostfix(stack);
+    cout << "Postfix: " <<s;
 }
+
+/*
+
+DECLARE struct Node
+    DECLARE info
+    DECLARE link 
+
+DECLARE LinkedList class
+    DECLARE first
+    DECLARE infix
+    DECLARE postfix
+    
+    DECLARE FUNCTION precedence(c)
+        IF(c == '+' || c == '-') return 1;
+        ELSE IF(c == '*' || c == '/') return 2;
+        ELSE IF(c == '^') return 3;
+        ELSE return 0;
+    DECLARE FUNCTION convertToPostFix(LinkedList&)
+        DECLARE first to new Node
+        FOR(x:stack.infix)
+                IF(x == '')
+                    Continue
+                ELSE IF (x == '(')
+                    stack.push(x)
+                ELSE IF (x == ')')
+                    WHILE(stack.peek() != '(')
+                        SET first = stack.pop()
+                        SET stack.postfix += first->info
+                    stack.pop()
+                ELSE IF (isOperator(x))
+                    IF (precedence(x) <= precedence(stack.peek())
+                        WHILE(precedence(x) <= precedence(stack.peek()))
+                            SET first = stack.pop()
+                            SET stack.postfix += first->info
+                        stack.push(x)
+                    ElSE    
+                        stack.push(x)
+                ELSE 
+                    stack.postfix+=x
+        WHILE(stack.peek != -99)
+            SET first = stack.pop()
+            SET stack.postfix += first->info
+        return ""
+    DECLARE Constructor
+    DECLARE Desructor
+    DECLARE FUNCTION getInfix(infix)
+        this->infix = infix 
+    DECLARE FUNCTION peek
+        If first != NULL return first->info
+        Else return -99;
+    DECLARE FUNCTION destroyList()
+        DECLARE temp
+        WHILE (first != NULL)
+            SET temp = first
+            SET first = first->LinkedList
+            DELETE temp
+    DECLARE FUNCTION push(s) 
+        DECLARE newNode
+        SET newNode to new Node
+        SET newNode->info = s
+        SET newNode->link = first
+        SET first = newNode
+    DECLARE FUNCTION pop()
+        DECLARE current
+        SET current to new Node
+        SET current = first
+        SET first = first->link
+        return current;
+    DECLARE FUNCTION printList()
+        DECLARE current
+        SET current to new Node
+        SET current = pop()
+        WHILE (current != NULL)
+            PRINT current->info 
+            SET current = current->link
+        
+
+*/
