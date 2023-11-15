@@ -1,6 +1,6 @@
 import { LoginCredentials } from "./model";
 import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
-import { auth } from "@/utils";
+import { auth } from "@utils/index";
 
 export function loginCredentialsFactory() {
   /**
