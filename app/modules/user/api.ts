@@ -1,4 +1,4 @@
-import { db } from "@/utils";
+import { db } from "@utils/index";
 import { CollectionReference, collection, doc } from "firebase/firestore";
 
 export class UserApi {
