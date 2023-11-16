@@ -4,6 +4,9 @@
 
 :root {
   --bg-color: #ffffff;
+  /* set safe space */
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -14,10 +17,14 @@
 
 body {
   background: var(--bg-color);
+  margin:0;
+  padding:0;
+  /* set max height according to safe space */
+  max-height: calc(100vh - var(--safe-top) - var(--safe-bottom));
 }
 
 .px-global {
-  @apply px-4 md:px-8;
+  @apply px-3 md:px-6;
 }
 
 .py-global {
@@ -25,7 +32,7 @@ body {
 }
 
 .mx-global {
-  @apply mx-4 md:mx-8;
+  @apply mx-3 md:mx-6;
 }
 
 .my-global {
