@@ -17,8 +17,8 @@
 
 body {
   background: var(--bg-color);
-  margin:0;
-  padding:0;
+  margin: 0;
+  padding: 0;
   /* set max height according to safe space */
   max-height: calc(100vh - var(--safe-top) - var(--safe-bottom));
 }
@@ -39,6 +39,68 @@ body {
   @apply my-6;
 }
 
+/* EditorJS CSS*/
+
+.ce-block__content,
+.ce-toolbar__content {
+  max-width: unset;
+}
+
+h1.ce-header {
+  @apply text-4xl pt-4;
+}
+h2.ce-header {
+  @apply text-3xl;
+}
+h3.ce-header {
+  @apply text-2xl;
+}
+h4.ce-header {
+  @apply text-xl;
+}
+h5.ce-header {
+  @apply text-lg;
+}
+h6.ce-header {
+  @apply text-base;
+}
+
+.cdx-block {
+  @apply !py-1 !pl-2;
+}
+
+.cdx-list {
+  margin-left: 0;
+  padding-left: 0;
+}
+/* 
+.toggle-block__selector {
+  @apply mt-[5px];
+} */
+
+.toggle-block__icon {
+  @apply inline-table pt-[5px];
+}
+
+.toggle-block__input {
+  @apply pt-0 -mt-[5px];
+}
+
+.toggle-block__item {
+  margin-left: 2rem !important;
+  position: relative;
+}
+
+.toggle-block__item::before {
+  content: " ";
+  position: absolute;
+  display: block;
+  width: 1.5px;
+  height: 100%;
+  left: -5px;
+  background-color: #dbdbdb;
+}
+
 /* General */
 
 .shimmer {
@@ -54,7 +116,7 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 10;
+  z-index: 5;
   transform: translateX(-100%);
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.705), transparent);
   animation: shimmer 2s infinite;
@@ -90,5 +152,28 @@ body {
     -moz-transform: translateY(0%);
     -ms-transform: translateY(0%);
     -o-transform: translateY(0%);
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideLeftInverse {
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-50%);
   }
 }
