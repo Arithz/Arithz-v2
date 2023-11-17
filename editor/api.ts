@@ -1,10 +1,15 @@
 import { BlockNoteEditor } from "@blocknote/core";
 
 class EditorAPI {
-  prevStateLength: number = 0;
+  prevState: any[] = [];
+  pageId: string = "";
 
-  loadSaveData(editor: BlockNoteEditor, pageId: string, blockPosition: string) {
-    const saveData = localStorage.getItem("saveData-" + pageId);
+  setPageId(pageId: string) {
+    this.pageId = pageId;
+  }
+
+  loadSaveData(editor: BlockNoteEditor, blockPosition: string) {
+    const saveData = localStorage.getItem("saveData-" + this.pageId);
     if (saveData) {
       const blocks = JSON.parse(saveData);
       editor.insertBlocks(blocks, editor.getTextCursorPosition().block, "before");
@@ -12,19 +17,19 @@ class EditorAPI {
     }
   }
 
-  saveNewData(editor: BlockNoteEditor, pageId: string) {
-    if (this.prevStateLength === editor.topLevelBlocks.length) return;
+  saveNewData(editor: BlockNoteEditor) {
+    if (this.prevState === editor.topLevelBlocks) return;
 
-    this.prevStateLength = editor.topLevelBlocks.length;
+    this.prevState = editor.topLevelBlocks;
     const sanitize = this.sanitizeBlocks(editor.topLevelBlocks);
-    localStorage.setItem("saveData-" + pageId, sanitize);
+    localStorage.setItem("saveData-" + this.pageId, sanitize);
   }
 
   private sanitizeBlocks(blocks: any[]) {
-    console.log("Before", blocks);
     let lastIndex = blocks.length;
 
     while (lastIndex >= 0) {
+      if (!blocks[lastIndex - 1]) break;
       if (blocks[lastIndex - 1].type === "image") break;
       if (blocks[lastIndex - 1].content.length > 0) {
         break;
@@ -38,7 +43,6 @@ class EditorAPI {
     }
 
     const sanitized = blocks.slice(0, lastIndex);
-    console.log(sanitized);
 
     // Return the JSON string of blocks up to the last non-empty block
     return JSON.stringify(sanitized);

@@ -1,9 +1,10 @@
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Icons from "../Icons";
 import Accordion from "../Accordion";
 
 function Sidebar() {
+  // ----------------------------
   const TopMenu = () => {
     return (
       <div className="flex items-center justify-end w-full gap-2 px-4 mb-4 ">
@@ -67,23 +68,42 @@ function Sidebar() {
       </div>
     );
   };
+  // ----------------------------
 
-  const [active, setActive] = useState(true);
+  // use state properties
+  const [active, setActive] = useState(false);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+
+  function handleSidebarActive() {
+    setActive(!active);
+    if (active) {
+      sidebarRef.current!.classList.remove("hidden");
+      sidebarRef.current!.classList.add("block");
+      sidebarRef.current!.classList.add("animate-slideLeft");
+    } else {
+      sidebarRef.current!.classList.remove("animate-slideLeft");
+      sidebarRef.current!.classList.add("animate-slideLeftInverse");
+      setTimeout(() => {
+        sidebarRef.current!.classList.remove("block");
+        sidebarRef.current!.classList.add("hidden");
+        sidebarRef.current!.classList.remove("animate-slideLeftInverse");
+      }, 300);
+    }
+  }
 
   return (
     <div className="fixed top-0 z-50 w-full max-h-full pointer-events-none h-fit py-global px-global">
       <div
         className="absolute z-10 pointer-events-auto h-7 w-7 fill-cs-white stroke-cs-black3 hover:stroke-cs-black stroke-[1.5] mt-2 mx-3"
-        onClick={() => setActive(!active)}
+        onClick={handleSidebarActive}
       >
         <Icons name="sidebar" />
       </div>
 
       {/* left bar */}
       <div
-        className={`${
-          active ? "block animate-slideLeft" : "animate-slideLeftInverse"
-        } relative overflow-y-auto space-y-3 w-full max-w-[15rem] pointer-events-auto border border-cs-border-fade rounded-lg shadow-lg h-full bg-cs-white py-3`}
+        className={`hidden relative overflow-y-auto space-y-3 w-full max-w-[15rem] pointer-events-auto border border-cs-border-fade rounded-lg shadow-lg h-full bg-cs-white py-3`}
+        ref={sidebarRef}
       >
         {/* top menu */}
         <TopMenu />
@@ -96,9 +116,12 @@ function Sidebar() {
           <div className="w-5 h-5 stroke-cs-black3 group-hover:stroke-cs-white stroke-[1.5] fill-none -mt-0.5">
             <Icons name="home" />
           </div>
-          <p className="text-sm font-semibold transition text-cs-black group-hover:text-cs-white">
+          <a
+            href="./"
+            className="text-sm font-semibold transition text-cs-black group-hover:text-cs-white"
+          >
             Home
-          </p>
+          </a>
         </div>
 
         {/* collections */}
@@ -111,19 +134,21 @@ function Sidebar() {
           <p>Dark mode</p>
         </div> */}
 
-        {/* Trash space */}
-        <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
-          <div className="w-6 h-6 stroke-1 fill-none">
-            <Icons name="trash"></Icons>
+        <div className="space-y-1">
+          {/* Trash space */}
+          <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
+            <div className="w-6 h-6 stroke-1 fill-none">
+              <Icons name="trash"></Icons>
+            </div>
+            <p>Trash</p>
           </div>
-          <p>Trash</p>
-        </div>
-        {/* Keyboard shortcuts */}
-        <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
-          <div className="w-6 h-6 stroke-1 fill-none">
-            <Icons name="keyboard"></Icons>
+          {/* Keyboard shortcuts */}
+          <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
+            <div className="w-6 h-6 pt-1.5 stroke-1 fill-none">
+              <Icons name="keyboard"></Icons>
+            </div>
+            <p>Keyboard shortcuts</p>
           </div>
-          <p></p>
         </div>
       </div>
       {/* right bar */}

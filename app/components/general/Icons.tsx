@@ -227,19 +227,20 @@ const Trash = () => {
 const Keyboard = () => {
   return (
     <svg
+      aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
-      className="icon icon-tabler icon-tabler-keyboard"
+      width="24"
+      height="24"
       viewBox="0 0 24 24"
     >
-      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-      <path d="M2 6m0 2a2 2 0 0 1 2 -2h16a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-16a2 2 0 0 1 -2 -2z" />
-      <path d="M6 10l0 .01" />
-      <path d="M10 10l0 .01" />
-      <path d="M14 10l0 .01" />
-      <path d="M18 10l0 .01" />
-      <path d="M6 14l0 .01" />
-      <path d="M18 14l0 .01" />
-      <path d="M10 14l4 .01" />
+      <path
+        strokeWidth="1.2"
+        d="M1 2a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2Z"
+      />
+      <path
+        strokeWidth="1.2"
+        d="M4 4h.01v.01H4V4Zm3 0h.01v.01H7V4Zm3 0h.01v.01H10V4Zm3 0h.01v.01H13V4Zm3 0h.01v.01H16V4Zm0 3h.01v.01H16V7Zm-3 0h.01v.01H13V7Zm-3 0h.01v.01H10V7ZM7 7h.01v.01H7V7ZM4 7h.01v.01H4V7Zm0 3h.01v.01H4V10Zm12 0h.01v.01H16V10ZM6 10h7.01v.01H13L6 10Z"
+      />
     </svg>
   );
 };
