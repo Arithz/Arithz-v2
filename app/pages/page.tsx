@@ -26,6 +26,13 @@ const INITIAL_DATA = {
         level: 1,
       },
     },
+    {
+      type: "toggle",
+      data: {
+        text: "This is a toggle block",
+        level: 1,
+      },
+    },
   ],
 };
 
@@ -108,7 +115,7 @@ export default function Page() {
             },
           },
         },
-        // data: INITIAL_DATA,
+        data: INITIAL_DATA,
       });
       isReady.current = true;
     }

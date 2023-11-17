@@ -47,39 +47,43 @@ body {
 }
 
 h1.ce-header {
-  @apply text-4xl pt-4;
+  @apply text-4xl pt-4 font-semibold;
 }
 h2.ce-header {
-  @apply text-3xl;
+  @apply text-3xl font-semibold;
 }
 h3.ce-header {
-  @apply text-2xl;
+  @apply text-2xl font-semibold;
 }
 h4.ce-header {
-  @apply text-xl;
+  @apply text-xl font-semibold;
 }
 h5.ce-header {
-  @apply text-lg;
+  @apply text-lg font-semibold;
 }
 h6.ce-header {
-  @apply text-base;
+  @apply text-base font-semibold;
 }
 
 .cdx-block {
-  @apply !py-1 !pl-2;
+  @apply !py-1 !pl-1;
 }
 
 .cdx-list {
   margin-left: 0;
   padding-left: 0;
 }
-/* 
-.toggle-block__selector {
-  @apply mt-[5px];
-} */
 
 .toggle-block__icon {
-  @apply inline-table pt-[5px];
+  @apply inline-table pt-[5px] !text-cs-black3 transition;
+}
+
+.toggle-block__icon:hover {
+  @apply !text-cs-black;
+}
+
+.toggle-block__input:checked + .toggle-block__icon {
+  @apply text-cs-accent-red;
 }
 
 .toggle-block__input {
@@ -91,13 +95,17 @@ h6.ce-header {
   position: relative;
 }
 
+.toggle-block__item:focus + .toggle-block__item::before {
+  background-color: #d95050;
+}
+
 .toggle-block__item::before {
   content: " ";
   position: absolute;
   display: block;
   width: 1.5px;
   height: 100%;
-  left: -5px;
+  left: -10px;
   background-color: #dbdbdb;
 }
 
