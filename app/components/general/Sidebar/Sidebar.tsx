@@ -71,7 +71,7 @@ function Sidebar() {
   // ----------------------------
 
   // use state properties
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
   const sidebarRef = useRef<HTMLDivElement>(null);
 
   function handleSidebarActive() {
