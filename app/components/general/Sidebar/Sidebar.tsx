@@ -111,11 +111,19 @@ function Sidebar() {
           <p>Dark mode</p>
         </div> */}
 
+        {/* Trash space */}
         <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
           <div className="w-6 h-6 stroke-1 fill-none">
             <Icons name="trash"></Icons>
           </div>
           <p>Trash</p>
+        </div>
+        {/* Keyboard shortcuts */}
+        <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
+          <div className="w-6 h-6 stroke-1 fill-none">
+            <Icons name="keyboard"></Icons>
+          </div>
+          <p></p>
         </div>
       </div>
       {/* right bar */}
