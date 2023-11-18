@@ -2,6 +2,7 @@
 import { useState, useRef } from "react";
 import Icons from "../Icons";
 import Accordion from "../Accordion";
+import { createModal } from "@components/modal/modal";
 
 function Sidebar() {
   // ----------------------------
@@ -24,7 +25,10 @@ function Sidebar() {
   const CallToAction = () => {
     return (
       <div className="flex w-full gap-2 px-4">
-        <button className="w-full px-2 py-1 text-xs font-semibold text-left transition border rounded shadow text-cs-black2 hover:text-cs-black bg-cs-white hover:bg-cs-white-hover active:bg-cs-white-hover border-cs-border-fade">
+        <button
+          className="w-full px-2 py-1 text-xs font-semibold text-left transition border rounded shadow text-cs-black2 hover:text-cs-black bg-cs-white hover:bg-cs-white-hover active:bg-cs-white-hover border-cs-border-fade"
+          onClick={createModal}
+        >
           + New collection
         </button>
         <button className="shadow rounded border border-cs-border-fade bg-cs-white hover:bg-cs-white-hover active:bg-cs-white-hover transition p-0.5 ">

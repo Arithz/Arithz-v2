@@ -2,6 +2,7 @@ import { BlockNoteEditor, uploadToTmpFilesDotOrg_DEV_ONLY } from "@blocknote/cor
 import { editorAPI } from "./api";
 
 const config = {
+  editable: false,
   onEditorReady(editor: BlockNoteEditor) {
     const blockPosition = editor.topLevelBlocks[0].id;
     const pageId = window.location.search.split("=")[1];
