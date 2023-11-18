@@ -5,8 +5,7 @@ const config = {
   onEditorReady(editor: BlockNoteEditor) {
     const blockPosition = editor.topLevelBlocks[0].id;
     const pageId = window.location.search.split("=")[1];
-    editorAPI.setPageId(pageId);
-    editorAPI.loadSaveData(editor, blockPosition);
+    editorAPI.initialize(pageId, editor, blockPosition);
   },
   onEditorContentChange: (editor: BlockNoteEditor) => {
     editorAPI.saveNewData(editor);

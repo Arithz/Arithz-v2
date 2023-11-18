@@ -46,7 +46,7 @@ function Sidebar() {
           {[...Array(3)].map((_, i) => {
             return (
               <li className="ms-3" key={i}>
-                <p className="px-3 py-1 rounded w-fit  hover:bg-cs-white-hover transition mb-1 text-[0.85rem] cursor-pointer font-normal leading-none text-gray-400 dark:text-gray-500">
+                <p className="px-3 py-1 rounded w-fit  hover:bg-cs-white-hover transition mb-1 text-[0.85rem] cursor-pointer font-normal leading-none text-cs-black3 hover:text-cs-black">
                   February 2022
                 </p>
               </li>
@@ -77,17 +77,17 @@ function Sidebar() {
   function handleSidebarActive() {
     setActive(!active);
     if (active) {
-      sidebarRef.current!.classList.remove("hidden");
+      sidebarRef.current!.classList.remove("animate-slideLeftInverse");
+      if (sidebarRef.current!.classList.contains("hidden"))
+        sidebarRef.current!.classList.remove("hidden");
+
       sidebarRef.current!.classList.add("block");
       sidebarRef.current!.classList.add("animate-slideLeft");
     } else {
+      sidebarRef.current!.classList.remove("block");
       sidebarRef.current!.classList.remove("animate-slideLeft");
+
       sidebarRef.current!.classList.add("animate-slideLeftInverse");
-      setTimeout(() => {
-        sidebarRef.current!.classList.remove("block");
-        sidebarRef.current!.classList.add("hidden");
-        sidebarRef.current!.classList.remove("animate-slideLeftInverse");
-      }, 300);
     }
   }
 

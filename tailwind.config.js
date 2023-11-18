@@ -15,7 +15,7 @@ module.exports = {
         "cs-white2": "#FEFEFE",
         "cs-white-hover": "#F0F3F9",
 
-        "cs-black": "#4D4D4D",
+        "cs-black": "#3A3A3A",
         "cs-black2": "#686868",
         "cs-black3": "#838383",
 
@@ -31,7 +31,6 @@ module.exports = {
         slideLeftInverse: "slideLeftInverse 0.3s ease forwards",
       },
     },
-    plugins: [
-    ],
+    plugins: [],
   },
 };

@@ -27,6 +27,14 @@ body {
   @apply px-3 md:px-6;
 }
 
+.pr-global {
+  @apply pr-3 md:pr-6;
+}
+
+.pl-global {
+  @apply pl-3 md:pl-6;
+}
+
 .py-global {
   @apply py-2 md:py-6;
 }

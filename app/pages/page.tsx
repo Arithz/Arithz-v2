@@ -9,8 +9,8 @@ export default function Page() {
   const isReady = useRef(false);
 
   return (
-    <main className="h-full max-w-2xl pt-3 mx-auto xl:max-w-3xl 3xl:max-w-4xl my-global">
-      <div className="px-[54px]">
+    <main className="h-full md:max-w-xl lg:max-w-2xl pt-3 mx-auto xl:max-w-[50rem] my-global">
+      <div className="px-global mt-10 md:mt-0 px-5 md:px-[54px]">
         <div className="relative w-full mb-2 rounded-lg md:mb-5 max-h-60 aspect-video shimmer ">
           <Image
             // src="https://placehold.co/1280x720/EEE/31343C"
@@ -18,7 +18,7 @@ export default function Page() {
             alt="cover"
             width={100}
             height={100}
-            className="object-center w-auto h-auto m-auto"
+            className="object-center w-auto h-auto m-auto select-none"
           />
         </div>
       </div>

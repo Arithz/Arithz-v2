@@ -1,0 +1,13 @@
+._blockOuter_nstdf_5:not([data-prev-type])
+  > ._block_nstdf_5
+  > ._blockContent_nstdf_22[data-content-type="bulletListItem"]:before {
+  color: #515962;
+}
+
+h2._inlineContent_nstdf_297 {
+  @apply text-3xl md:text-4xl;
+}
+
+.tiptap.ProseMirror._bnEditor_12je0_3._defaultStyles_12je0_34 {
+  @apply px-5 md:px-[54px];
+}

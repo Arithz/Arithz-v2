@@ -1,11 +1,14 @@
-import { BlockNoteEditor } from "@blocknote/core";
+import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
+import { blob } from "stream/consumers";
 
 class EditorAPI {
   prevState: any[] = [];
   pageId: string = "";
 
-  setPageId(pageId: string) {
+  initialize(pageId: string, editor: BlockNoteEditor, blockPosition: string) {
     this.pageId = pageId;
+    this.initializeKeyboardShortcuts(editor);
+    this.loadSaveData(editor, blockPosition);
   }
 
   loadSaveData(editor: BlockNoteEditor, blockPosition: string) {
@@ -46,6 +49,74 @@ class EditorAPI {
 
     // Return the JSON string of blocks up to the last non-empty block
     return JSON.stringify(sanitized);
+  }
+
+  // keyboard shortcuts
+  // delete texts from block
+  initializeKeyboardShortcuts(editor: BlockNoteEditor) {
+    document.addEventListener("keydown", (e) => {
+      // Alt + s - move block down
+      if (e.altKey && e.key === "s") {
+        e.preventDefault();
+        this.moveBlock(editor, "down");
+      }
+      // Alt + w - move block up
+      if (e.altKey && e.key === "w") {
+        e.preventDefault();
+        this.moveBlock(editor, "up");
+      }
+
+      // Ctrl + b - bold
+      if (e.ctrlKey && e.key === "b") {
+        e.preventDefault();
+        this.toggleTextStyle(editor, "bold");
+      }
+
+      // Ctrl + i - italic
+      if (e.ctrlKey && e.key === "i") {
+        e.preventDefault();
+        this.toggleTextStyle(editor, "italic");
+      }
+
+      // Ctrl + Shift + Backspace - delete texts from block
+      if (e.ctrlKey && e.shiftKey && e.key === "Backspace") {
+        e.preventDefault();
+        this.deleteFullTextFromBlock(editor);
+      }
+    });
+  }
+
+  private deleteFullTextFromBlock(editor: BlockNoteEditor) {
+    const block = editor.getTextCursorPosition().block as any;
+    let newBlock = block;
+    if (block.content.length > 0) {
+      newBlock.content[0].text = "";
+    }
+    editor.updateBlock(block.id, newBlock);
+  }
+
+  private moveBlock(editor: BlockNoteEditor, direction: "up" | "down") {
+    const block = editor.getTextCursorPosition().block as any;
+    const blockPosition = editor.topLevelBlocks.findIndex((b) => b.id === block.id);
+    if (blockPosition === 0) return;
+    const newBlockPosition = blockPosition + (direction === "up" ? -1 : 1);
+    const newBlock = editor.topLevelBlocks[newBlockPosition];
+    editor.updateBlock(block.id, newBlock);
+    editor.updateBlock(newBlock.id, block);
+    editor.setTextCursorPosition(newBlock.id, "end");
+  }
+
+  private toggleTextStyle(editor: BlockNoteEditor, style: string) {
+    const block = editor.getTextCursorPosition().block as any;
+    if (block.content.length === 0) return;
+    // check if the text is already bold or not and toggle it
+    const isStyleAlreadyApplied = block.content[0].styles[style];
+    if (isStyleAlreadyApplied) {
+      delete block.content[0].styles[style];
+    } else {
+      block.content[0].styles[style] = true;
+    }
+    editor.updateBlock(block.id, block);
   }
 }
 

@@ -1,6 +1,7 @@
 import { BlockNoteEditor } from "@blocknote/core";
 import { BlockNoteView, useBlockNote, ReactSlashMenuItem } from "@blocknote/react";
 import "@blocknote/core/style.css";
+import "./style.css";
 import config from "./config";
 
 export default function Editor() {
