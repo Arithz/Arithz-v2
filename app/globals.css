@@ -7,6 +7,8 @@
   /* set safe space */
   --safe-top: env(safe-area-inset-top);
   --safe-bottom: env(safe-area-inset-bottom);
+  --safe-height: calc(95vh - var(--safe-top) - var(--safe-bottom));
+  --max-height: -webkit-fill-available;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -20,7 +22,11 @@ body {
   margin: 0;
   padding: 0;
   /* set max height according to safe space */
-  max-height: calc(100vh - var(--safe-top) - var(--safe-bottom));
+  max-height: var(--max-height);
+}
+
+.max-h-safe {
+  max-height: var(--max-height);
 }
 
 .px-global {

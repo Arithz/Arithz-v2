@@ -96,7 +96,7 @@ function Sidebar() {
   }
 
   return (
-    <div className="fixed top-0 z-50 w-full max-h-full pointer-events-none h-fit py-global px-global">
+    <div className="fixed top-0 z-50 w-full pointer-events-none py-global px-global">
       <div
         className="absolute z-10 pointer-events-auto h-7 w-7 fill-cs-white stroke-cs-black3 hover:stroke-cs-black stroke-[1.5] mt-2 mx-3"
         onClick={handleSidebarActive}
@@ -106,7 +106,7 @@ function Sidebar() {
 
       {/* left bar */}
       <div
-        className={`hidden relative overflow-y-auto space-y-3 w-full max-w-[15rem] pointer-events-auto border border-cs-border-fade rounded-lg shadow-lg h-full bg-cs-white py-3`}
+        className={`hidden relative overflow-y-auto space-y-3 w-full max-w-[15rem] pointer-events-auto border border-cs-border-fade rounded-lg shadow-lg max-h-safe bg-cs-white py-3`}
         ref={sidebarRef}
       >
         {/* top menu */}

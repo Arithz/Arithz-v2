@@ -87,39 +87,10 @@ function RightSidebar() {
     } else {
       setActive(true);
     }
-
-    // if (active) {
-    //   console.log("active", active);
-    //   panelRef.current!.classList.add("animate-slideLeft");
-    //   panelRef.current!.classList.add("block");
-    //   panelRef.current!.style.visibility = "show";
-    // } else {
-    //   console.log("not active", active);
-    //   panelRef.current!.classList.remove("animate-slideLeft");
-    //   panelRef.current!.classList.remove("block");
-    //   panelRef.current!.style.visibility = "hidden";
-    // }
-
-    // if (!active) {
-    //   panelRef.current!.classList.remove("animate-slideLeftInverse");
-    //   if (panelRef.current!.classList.contains("hidden"))
-    //     panelRef.current!.classList.remove("hidden");
-    //   else {
-    //     console.log("not hidden");
-    //   }
-
-    //   panelRef.current!.classList.add("block");
-    //   panelRef.current!.classList.add("animate-slideLeft");
-    // } else {
-    //   panelRef.current!.classList.remove("block");
-    //   panelRef.current!.classList.remove("animate-slideLeft");
-
-    //   panelRef.current!.classList.add("animate-slideLeftInverse");
-    // }
   }
 
   return (
-    <div className="fixed top-0 right-0 z-50 flex flex-col-reverse max-h-full w-fit h-fit py-global pr-global">
+    <div className="fixed top-0 right-0 z-40 flex flex-col-reverse w-fit py-global pr-global">
       <Panel />
 
       <div className="flex items-center justify-end w-full gap-2">
