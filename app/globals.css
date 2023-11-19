@@ -21,12 +21,11 @@ body {
   background: var(--bg-color);
   margin: 0;
   padding: 0;
-  /* set max height according to safe space */
-  max-height: var(--max-height);
+  height: var(--max-height);
 }
 
 .max-h-safe {
-  max-height: var(--max-height);
+  max-height: calc(88vh + var(--safe-top) + var(--safe-bottom));
 }
 
 .px-global {
@@ -88,6 +87,46 @@ body {
   }
 }
 
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+}
+
 @keyframes slideUp {
   0% {
     opacity: 0;
@@ -104,6 +143,17 @@ body {
     -moz-transform: translateY(0%);
     -ms-transform: translateY(0%);
     -o-transform: translateY(0%);
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 1;
+    transform: translateY(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(50%);
   }
 }
 
@@ -127,5 +177,28 @@ body {
     opacity: 0;
     visibility: hidden;
     transform: translateX(-50%);
+  }
+}
+
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(50%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slideRightInverse {
+  0% {
+    opacity: 1;
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(50%);
   }
 }

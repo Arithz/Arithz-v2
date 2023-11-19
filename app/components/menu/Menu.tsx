@@ -1,13 +1,12 @@
 "use client";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import Icons from "@components/general/Icons";
 
-function RightSidebar() {
+function Menu() {
   const [active, setActive] = useState(false);
   const [panelconfig, setPanelConfig] = useState<"menu" | "history">("menu");
-  const panelRef = useRef<HTMLDivElement>(null);
 
-  const Menu = () => {
+  const MenuOption = () => {
     return (
       <>
         <p className="px-3 text-sm text-cs-black2">Quick menu</p>
@@ -69,12 +68,11 @@ function RightSidebar() {
     return (
       <div
         className={`${
-          !active && "hidden"
+          active ? "animate-slideRight" : "hidden"
         } overflow-y-auto space-y-3 w-full max-w-[15rem] pointer-events-auto border border-cs-border-fade rounded-lg shadow-lg h-full bg-cs-white py-3`}
-        data-active={active}
-        ref={panelRef}
+        id="panelRef"
       >
-        {panelconfig === "menu" && <Menu />}
+        {panelconfig === "menu" && <MenuOption />}
         {panelconfig === "history" && <History />}
       </div>
     );
@@ -90,10 +88,10 @@ function RightSidebar() {
   }
 
   return (
-    <div className="fixed top-0 right-0 z-40 flex flex-col-reverse w-fit py-global pr-global">
+    <div className="fixed top-0 right-0 z-40 flex flex-col-reverse md w-fit py-global pr-global">
       <Panel />
 
-      <div className="flex items-center justify-end w-full gap-2">
+      <div className="flex items-center justify-end w-full gap-2 pr-2 mt-1">
         <div className="text-sm text-cs-black2">
           <p>Edited 24/11</p>
         </div>
@@ -104,7 +102,7 @@ function RightSidebar() {
           <Icons name="history"></Icons>
         </div>
         <div
-          className="p-1 transition rounded cursor-pointer stroke-1 w-9 h-9 fill-none text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black"
+          className="p-1 transition rounded cursor-pointer stroke-1 w-9 h-9 fill-cs-black3 hover:fill-cs-black text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black"
           onClick={() => handlePanelActive("menu")}
         >
           <Icons name="dots"></Icons>
@@ -114,4 +112,4 @@ function RightSidebar() {
   );
 }
 
-export default RightSidebar;
+export default Menu;

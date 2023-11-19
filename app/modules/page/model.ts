@@ -1,8 +1,9 @@
 export interface Page {
   id: string;
   name: string;
-  visibility: "public" | "private";
+  visibility: boolean;
   content: {};
-  created_at?: any;
+  topic: string;
+  created_at: any;
   updated_at?: any;
 }

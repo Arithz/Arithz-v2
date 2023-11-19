@@ -1,20 +1,19 @@
 "use client";
-import { useState, useRef } from "react";
-import Icons from "../Icons";
-import Accordion from "../Accordion";
-import { createModal } from "@components/modal/modal";
+import { useState, useRef, useEffect } from "react";
+import Icons from "../general/Icons";
+import Collections from "./Collections";
+import {
+  openSearchModal,
+  openNewCollection,
+  openCommandPalette,
+  initializeKeyboardShortcuts,
+} from "@utils/keyboard";
 
 function Sidebar() {
   // ----------------------------
   const TopMenu = () => {
     return (
       <div className="flex items-center justify-end w-full gap-2 px-4 mb-4 ">
-        <div className="w-6 h-6 stroke-cs-black3 hover:stroke-cs-accent-red stroke-[1.5] fill-none">
-          <Icons name="search" />
-        </div>
-        <div className="w-6 h-6 stroke-cs-black3 hover:stroke-cs-accent-red stroke-[1.5] fill-none">
-          <Icons name="settings" />
-        </div>
         <div className="text-xs text-cs-white bg-cs-accent-red rounded-[50%] w-6 leading-6 text-center">
           A
         </div>
@@ -27,56 +26,29 @@ function Sidebar() {
       <div className="flex w-full gap-2 px-4">
         <button
           className="w-full px-2 py-1 text-xs font-semibold text-left transition border rounded shadow text-cs-black2 hover:text-cs-black bg-cs-white hover:bg-cs-white-hover active:bg-cs-white-hover border-cs-border-fade"
-          onClick={createModal}
+          onClick={openNewCollection}
         >
           + New collection
         </button>
-        <button className="shadow rounded border border-cs-border-fade bg-cs-white hover:bg-cs-white-hover active:bg-cs-white-hover transition p-0.5 ">
-          <div className="w-6 h-6 p-0.5 stroke-cs-black3 hover:stroke-cs-black stroke-1 fill-none">
-            <Icons name="edit" />
+        <button className="p-0.5 transition border rounded shadow border-cs-border-fade bg-cs-white hover:bg-cs-white-hover active:bg-cs-white-hover ">
+          <div
+            className="p-0.5 w-6 h-6 stroke-cs-black3 hover:stroke-cs-black2 stroke-[1.5] fill-none"
+            onClick={() => openSearchModal()}
+          >
+            <Icons name="search" />
           </div>
         </button>
       </div>
     );
   };
 
-  const Collections = () => {
-    const Header = () => {
-      return <h2 className="text-sm">Collection</h2>;
-    };
-    const Subcollection = () => {
-      return (
-        <ol className="relative border-s border-gray-200 ml-2.5 mt-1 text-xs">
-          {[...Array(3)].map((_, i) => {
-            return (
-              <li className="ms-3" key={i}>
-                <p className="px-3 py-1 rounded w-fit  hover:bg-cs-white-hover transition mb-1 text-[0.85rem] cursor-pointer font-normal leading-none text-cs-black3 hover:text-cs-black">
-                  February 2022
-                </p>
-              </li>
-            );
-          })}
-        </ol>
-      );
-    };
-
-    return (
-      <div className="px-4 space-y-2">
-        {[...Array(6)].map((_, i) => {
-          return (
-            <Accordion key={i} header={<Header />}>
-              <Subcollection />
-            </Accordion>
-          );
-        })}
-      </div>
-    );
-  };
-  // ----------------------------
-
   // use state properties
   const [active, setActive] = useState(true);
   const sidebarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    initializeKeyboardShortcuts();
+  }, []);
 
   function handleSidebarActive() {
     setActive(!active);
@@ -106,7 +78,7 @@ function Sidebar() {
 
       {/* left bar */}
       <div
-        className={`hidden relative overflow-y-auto space-y-3 w-full max-w-[15rem] pointer-events-auto border border-cs-border-fade rounded-lg shadow-lg max-h-safe bg-cs-white py-3`}
+        className={`hidden relative overflow-y-auto space-y-3 w-full max-w-[17rem] pointer-events-auto border border-cs-border-fade rounded-lg shadow-lg max-h-safe md:max-h-[95vh] bg-cs-white py-3`}
         ref={sidebarRef}
       >
         {/* top menu */}
@@ -138,20 +110,45 @@ function Sidebar() {
           <p>Dark mode</p>
         </div> */}
 
-        <div className="space-y-1">
+        <div className="pt-2 border-0 border-t border-cs-border-fade">
           {/* Trash space */}
           <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
             <div className="w-6 h-6 stroke-1 fill-none">
               <Icons name="trash"></Icons>
             </div>
-            <p>Trash</p>
+            <p className="text-xs">Trash</p>
+          </div>
+          {/* Settings */}
+          <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
+            <div className="w-6 h-6 stroke-1 fill-none">
+              <Icons name="settings"></Icons>
+            </div>
+            <p className="text-xs">Settings</p>
           </div>
           {/* Keyboard shortcuts */}
           <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
             <div className="w-6 h-6 pt-1.5 stroke-1 fill-none">
               <Icons name="keyboard"></Icons>
             </div>
-            <p>Keyboard shortcuts</p>
+            <p className="text-xs">Keyboard shortcuts</p>
+          </div>
+          {/* Command Palette */}
+          <div
+            className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black"
+            onClick={openCommandPalette}
+          >
+            <div className="w-6 h-6 stroke-1 fill-none">
+              <Icons name="command"></Icons>
+            </div>
+            <p className="text-xs">Command Palette</p>
+            <div className="flex gap-1 ml-auto">
+              <kbd className="py-0.5 px-1.5 text-[0.65rem] font-semibold rounded border border-cs-border-fade shadow-[0px_1.5px_0.5px_0px_rgba(0,0,0,0.1)]">
+                Ctrl
+              </kbd>
+              <kbd className="py-0.5 px-1.5 text-[0.65rem] font-semibold rounded border border-cs-border-fade shadow-[0px_1.5px_0.5px_0px_rgba(0,0,0,0.1)]">
+                K
+              </kbd>
+            </div>
           </div>
         </div>
       </div>

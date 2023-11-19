@@ -1,14 +1,26 @@
-import { BlockNoteEditor, PartialBlock } from "@blocknote/core";
-import { blob } from "stream/consumers";
+import { BlockNoteEditor } from "@blocknote/core";
 
 class EditorAPI {
-  prevState: any[] = [];
   pageId: string = "";
 
   initialize(pageId: string, editor: BlockNoteEditor, blockPosition: string) {
     this.pageId = pageId;
     this.initializeKeyboardShortcuts(editor);
     this.loadSaveData(editor, blockPosition);
+  }
+
+  autofocus(editor: BlockNoteEditor) {
+    const block = editor.getTextCursorPosition().block as any;
+    const userViewport = window.scrollY;
+    const blockPosition = document
+      .querySelector(`[data-id="${block.id}"]`)
+      ?.getBoundingClientRect().top;
+    if (blockPosition) {
+      window.scrollTo({
+        top: userViewport + blockPosition - window.innerHeight / 2,
+        behavior: "smooth",
+      });
+    }
   }
 
   loadSaveData(editor: BlockNoteEditor, blockPosition: string) {
@@ -21,9 +33,6 @@ class EditorAPI {
   }
 
   saveNewData(editor: BlockNoteEditor) {
-    if (this.prevState === editor.topLevelBlocks) return;
-
-    this.prevState = editor.topLevelBlocks;
     const sanitize = this.sanitizeBlocks(editor.topLevelBlocks);
     localStorage.setItem("saveData-" + this.pageId, sanitize);
   }

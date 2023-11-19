@@ -1,10 +1,15 @@
 import { Page } from "../page/model";
 
+export interface PagesOverview {
+  id: string;
+  name: string;
+  visibility: boolean;
+}
+
 export interface SubCollection {
   id: string;
   name: string;
-  visibility: "public" | "private";
+  visibility: boolean;
   created_at?: any;
-  updated_at?: any;
-  pages: Page[];
+  pages: PagesOverview[];
 }

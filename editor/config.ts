@@ -9,6 +9,7 @@ const config = {
     editorAPI.initialize(pageId, editor, blockPosition);
   },
   onEditorContentChange: (editor: BlockNoteEditor) => {
+    editorAPI.autofocus(editor);
     editorAPI.saveNewData(editor);
   },
   uploadFile: uploadToTmpFilesDotOrg_DEV_ONLY,
