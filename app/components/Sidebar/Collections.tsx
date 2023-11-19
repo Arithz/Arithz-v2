@@ -25,7 +25,7 @@ const Subcollection = (props: { subcollections: SubCollection[] }) => {
             key={subcollection.id}
             onClick={() => openSearchModal(subcollection.pages, subcollection.name)}
           >
-            <p className="px-3 py-1 rounded w-fit  hover:bg-cs-white-hover transition mb-1 text-[0.85rem] cursor-pointer font-normal leading-none text-cs-black3 hover:text-cs-black">
+            <p className="px-3 py-1 mb-1 text-[0.95rem] font-normal leading-none transition rounded cursor-pointer w-fit hover:bg-cs-white-hover text-cs-black3 hover:text-cs-black">
               {subcollection.name}
             </p>
           </li>
@@ -86,7 +86,7 @@ function Colletions() {
   }
 
   return (
-    <div className="px-4 space-y-2">
+    <div className="px-4 !mt-1 space-y-2">
       {/* {[...Array(6)].map((_, i) => {
         return (
           <Accordion key={i} header={<Header />}>

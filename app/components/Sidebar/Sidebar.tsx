@@ -25,7 +25,7 @@ function Sidebar() {
     return (
       <div className="flex w-full gap-2 px-4">
         <button
-          className="w-full px-2 py-1 text-xs font-semibold text-left transition border rounded shadow text-cs-black2 hover:text-cs-black bg-cs-white hover:bg-cs-white-hover active:bg-cs-white-hover border-cs-border-fade"
+          className="w-full px-2 py-1 text-xs font-semibold text-left transition border rounded shadow md:text-sm text-cs-black2 hover:text-cs-black bg-cs-white hover:bg-cs-white-hover active:bg-cs-white-hover border-cs-border-fade"
           onClick={openNewCollection}
         >
           + New collection
@@ -78,7 +78,7 @@ function Sidebar() {
 
       {/* left bar */}
       <div
-        className={`hidden relative overflow-y-auto space-y-3 w-full max-w-[17rem] pointer-events-auto border border-cs-border-fade rounded-lg shadow-lg max-h-safe md:max-h-[95vh] bg-cs-white py-3`}
+        className={`hidden relative overflow-y-auto space-y-3 w-full max-w-[20rem] pointer-events-auto border border-cs-border-fade rounded-lg shadow-lg max-h-safe md:max-h-[95vh] bg-cs-white py-3`}
         ref={sidebarRef}
       >
         {/* top menu */}
@@ -94,7 +94,7 @@ function Sidebar() {
           </div>
           <a
             href="./"
-            className="text-sm font-semibold transition text-cs-black group-hover:text-cs-white"
+            className="text-base font-semibold transition text-cs-black group-hover:text-cs-white"
           >
             Home
           </a>
@@ -116,21 +116,21 @@ function Sidebar() {
             <div className="w-6 h-6 stroke-1 fill-none">
               <Icons name="trash"></Icons>
             </div>
-            <p className="text-xs">Trash</p>
+            <p className="text-sm">Trash</p>
           </div>
           {/* Settings */}
           <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
             <div className="w-6 h-6 stroke-1 fill-none">
               <Icons name="settings"></Icons>
             </div>
-            <p className="text-xs">Settings</p>
+            <p className="text-sm">Settings</p>
           </div>
           {/* Keyboard shortcuts */}
           <div className="flex items-center w-full gap-2 px-4 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
             <div className="w-6 h-6 pt-1.5 stroke-1 fill-none">
               <Icons name="keyboard"></Icons>
             </div>
-            <p className="text-xs">Keyboard shortcuts</p>
+            <p className="text-sm">Keyboard shortcuts</p>
           </div>
           {/* Command Palette */}
           <div
@@ -140,7 +140,7 @@ function Sidebar() {
             <div className="w-6 h-6 stroke-1 fill-none">
               <Icons name="command"></Icons>
             </div>
-            <p className="text-xs">Command Palette</p>
+            <p className="text-sm">Command Palette</p>
             <div className="flex gap-1 ml-auto">
               <kbd className="py-0.5 px-1.5 text-[0.65rem] font-semibold rounded border border-cs-border-fade shadow-[0px_1.5px_0.5px_0px_rgba(0,0,0,0.1)]">
                 Ctrl

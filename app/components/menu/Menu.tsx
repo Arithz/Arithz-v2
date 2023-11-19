@@ -19,41 +19,41 @@ function Menu() {
               <div className="mx-auto stroke-1 w-7 h-7 fill-none ">
                 <Icons name="trash"></Icons>
               </div>
-              <p className="text-[0.5rem] text-center">Delete</p>
+              <p className="text-xs text-center">Delete</p>
             </div>
           ))}
         </div>
         <div className="py-1.5 space-y-1 border-0 border-t border-b border-cs-border-fade">
           {/* Trash space */}
           <div className="flex items-center w-full gap-2 px-3 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
-            <div className="w-5 h-5 stroke-1 fill-none">
+            <div className="w-6 h-6 stroke-1 fill-none">
               <Icons name="trash"></Icons>
             </div>
-            <p className="text-xs">Export page</p>
+            <p className="text-sm">Export page</p>
           </div>
           {/* Keyboard shortcuts */}
           <div className="flex items-center w-full gap-2 px-3 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
-            <div className="w-5 h-5 pt-1 stroke-1 fill-none">
+            <div className="w-6 h-6 pt-1 stroke-1 fill-none">
               <Icons name="keyboard"></Icons>
             </div>
-            <p className="text-xs">Keyboard shortcuts</p>
+            <p className="text-sm">Keyboard shortcuts</p>
           </div>
         </div>
 
         <div className="!mt-1 space-y-1">
           {/* Trash space */}
           <div className="flex items-center w-full gap-2 px-3 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
-            <div className="w-5 h-5 stroke-1 fill-none">
+            <div className="w-6 h-6 stroke-1 fill-none">
               <Icons name="trash"></Icons>
             </div>
-            <p className="text-xs">Export page</p>
+            <p className="text-sm">Export page</p>
           </div>
           {/* Keyboard shortcuts */}
           <div className="flex items-center w-full gap-2 px-3 py-1 text-sm transition cursor-pointer text-cs-black2 hover:bg-cs-white-hover hover:text-cs-black stroke-cs-black3 hover:stroke-cs-black">
-            <div className="w-5 h-5 pt-1 stroke-1 fill-none">
+            <div className="w-6 h-6 pt-1 stroke-1 fill-none">
               <Icons name="keyboard"></Icons>
             </div>
-            <p className="text-xs">Keyboard shortcuts</p>
+            <p className="text-sm">Keyboard shortcuts</p>
           </div>
         </div>
       </>

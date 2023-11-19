@@ -23,7 +23,7 @@ function Accordion(props: AccordionProps) {
         <div className={`w-6 h-6  stroke-1 fill-none`}>
           {active ? <Icons name="chevron-up" /> : <Icons name="chevron-down" />}
         </div>
-        <div>{props.header}</div>
+        <p>{props.header}</p>
       </button>
       <div className={`${active ? "block" : "hidden"}`}>{props.children}</div>
     </div>
